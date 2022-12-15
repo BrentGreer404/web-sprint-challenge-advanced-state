@@ -14,6 +14,11 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import reducer from '../state/reducer'
 
+const initialState = {
+  wheelIndex: 0,
+  
+}
+
 // REDUX STORE
 let store
 export const resetStore = () => {
