@@ -14,10 +14,6 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import reducer from '../state/reducer'
 
-const initialState = {
-  wheelIndex: 0,
-  
-}
 
 // REDUX STORE
 let store
@@ -47,3 +43,8 @@ export default function App() {
     </Provider>
   )
 }
+
+const data = { 
+  "quiz_id": "cnxbw", 
+  "question": "What is a closure?", 
+  "answers": [{ "answer_id": "gkcnt", "text": "A function plus its bindings" }, { "answer_id": "kqcwr", "text": "Clearly some kind of elephant" }] }
