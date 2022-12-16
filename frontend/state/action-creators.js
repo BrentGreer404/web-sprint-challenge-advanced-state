@@ -53,7 +53,7 @@ export function postQuiz(form) {
       "false_answer_text": form.newFalseAnswer }
     axios.post(URL+"new", newQuiz)
     .then(res => {
-      const message = res.data.message
+      const message = `Congrats: "${form.newQuestion}" is a great question!`
       dispatch(setMessage(message))
       dispatch(resetForm())
     })

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchQuiz, postAnswer, selectAnswer } from '../state/action-creators'
 
 function Quiz(props) {
+
   if (!props.quiz){
     props.fetchQuiz()
     }
@@ -15,17 +16,17 @@ function Quiz(props) {
             <div id="quizAnswers">
             {[0, 1].map((v => {
               return (
-                <div key={v} className="answer selected">
+                <div key={v} className={v === props.selectedAnswer ? "answer selected" : "answer"}>
                 {props.quiz.answers[v].text}
                 <button onClick={() => props.selectAnswer(v)}>
                   {v === props.selectedAnswer ? "SELECTED" : "Select"}
-                </button>
+                </button>   
               </div>
               )
             }))}
             </div>
 
-            <button onClick={() => props.postAnswer(props.quiz.quiz_id, props.quiz.answers[props.selectedAnswer].answer_id)} id="submitAnswerBtn">Submit answer</button>
+            <button disabled={props.selectedAnswer != null ? false: true} onClick={() => props.postAnswer(props.quiz.quiz_id, props.quiz.answers[props.selectedAnswer].answer_id)} id="submitAnswerBtn">Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
