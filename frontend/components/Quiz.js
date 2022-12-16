@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchQuiz, selectAnswer } from '../state/action-creators'
+import { fetchQuiz, postAnswer, selectAnswer } from '../state/action-creators'
 
 function Quiz(props) {
   if (!props.quiz){
@@ -12,24 +12,20 @@ function Quiz(props) {
         props.quiz ? (
           <>
             <h2>{props.quiz.question}</h2>
-
             <div id="quizAnswers">
-              <div className="answer selected">
-                {props.quiz.answers[0].text}
-                <button onClick={() => props.selectAnswer(0)}>
-                  SELECTED
+            {[0, 1].map((v => {
+              return (
+                <div key={v} className="answer selected">
+                {props.quiz.answers[v].text}
+                <button onClick={() => props.selectAnswer(v)}>
+                  {v === props.selectedAnswer ? "SELECTED" : "Select"}
                 </button>
               </div>
-
-              <div className="answer">
-                {props.quiz.answers[1].text}
-                <button onClick={() => props.selectAnswer(1)}>
-                  Select
-                </button>
-              </div>
+              )
+            }))}
             </div>
 
-            <button id="submitAnswerBtn">Submit answer</button>
+            <button onClick={() => props.postAnswer(props.quiz.quiz_id, props.quiz.answers[props.selectedAnswer].answer_id)} id="submitAnswerBtn">Submit answer</button>
           </>
         ) : 'Loading next quiz...'
       }
@@ -44,4 +40,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchQuiz, selectAnswer})(Quiz)
+export default connect(mapStateToProps, {fetchQuiz, selectAnswer, postAnswer})(Quiz)

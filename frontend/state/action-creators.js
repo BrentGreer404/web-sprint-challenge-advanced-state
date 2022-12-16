@@ -29,16 +29,34 @@ export function fetchQuiz() {
     // - Dispatch an action to send the obtained quiz to its state
   }
 }
-export function postAnswer() {
+export function postAnswer(quizId, answerId) {
   return function (dispatch) {
+    const answer = { "quiz_id": quizId, "answer_id": answerId }
+    axios.post(URL+"answer", answer)
+    .then((res) => {
+      const message = res.data.message
+      dispatch(selectAnswer(""))
+      dispatch(setMessage(message))
+      dispatch(setQuiz(null))
+    })
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
     // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
   }
 }
-export function postQuiz() {
+export function postQuiz(form) {
   return function (dispatch) {
+    const newQuiz = {
+      "question_text": form.newQuestion,
+      "true_answer_text": form.newTrueAnswer,
+      "false_answer_text": form.newFalseAnswer }
+    axios.post(URL+"new", newQuiz)
+    .then(res => {
+      const message = res.data.message
+      dispatch(setMessage(message))
+      dispatch(resetForm())
+    })
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
