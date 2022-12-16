@@ -36,7 +36,8 @@ function Quiz(props) {
 const mapStateToProps = state => {
   return {
     quiz: state.quiz.quiz,
-    selectedAnswer: state.selectedAnswer
+    selectedAnswer: state.selectedAnswer,
+    message: state.message
   }
 }
 

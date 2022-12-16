@@ -14,7 +14,7 @@ export function setMessage(message) { return {type: SET_INFO_MESSAGE, payload: m
 
 export function setQuiz(quiz) { return {type: SET_QUIZ_INTO_STATE, payload: quiz}}
 
-export function inputChange(event) { return {type: INPUT_CHANGE, payload: event.target} }
+export function inputChange(event) { return {type: INPUT_CHANGE, payload: event} }
 
 export function resetForm() { return {type:RESET_FORM} }
 
